@@ -1,0 +1,36 @@
+This section deals with the data set(s) used in the research. It provides a descrip-
+tion of these and discusses the pre-processing of the data set(s) that was carried
+out for the research. It should include the following.
+Source Identify and describe the source of the data set(s).
+Data Identify and describe the data set(s) themselves (features, records, etc.).
+Pre-processing Identify and describe the pre-processing steps taken.
+
+
+
+The program is designed in such a way that it initially takes an input n, and then generates a random   
+
+
+
+For each input matrix, we run a loop over this matrix and each iteration selects a random subset of rows
+then searches for the best size all one matrix over this search space, every iteration represents a state s, over a state Space S.
+
+
+For each randomly selected state s, we run both algorithms for several iterations(i.e like 15 times) where s changes in every iteration and the size of the input matrix,
+remains unchanged in each of these iterations. 
+
+For each state s we have in a given iteration, we search for a complete sub-matrix while keeping track of the complete sub-matrix with the best-size
+(i.e maximum size) and then record the total run-time taken to complete a search over this current iteration or the state s for both algorithms.
+We then calculate the absolute value of the difference in the total run-time by both algorithms over the state s(i.e each iteration) and then
+write the results to the csv file corresponding to the size of the current input matrix. The program generates a new csv file for each input matrix, to record
+the total run-time taken to produce the best complete sub-matrix in a each randomly selected state s over the state space S in every iteration while the input-size of the matrix is unchanged for both algorithms,
+
+moreover, the program generates a new random input matrix by adding an integer to the previously received input n then runs eaxctly as described above for this input matrix,
+and a new csv file is generated to record the total average run-time taken to search for the best complete sub-matrix by both algorithms over the above mentioned iterations for each input matrix.
+
+
+
+
+
+
+
+

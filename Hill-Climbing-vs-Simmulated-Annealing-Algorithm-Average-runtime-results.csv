@@ -1,0 +1,11 @@
+Iteration, Input-matrix-size, Best-size-produced-by-the-hillClimbing-algorithm, Best-size-produced-by-the-simmulatedAnnealing-algorithm, Average-runtime-by-the-hillClimbing-algorithm, Average-runtime-by-the-simmulatedAnnealing-algorithm, Absolute-Total-Difference-in-average-runtimes-by-both-algorithms
+0, 10000, 135, 153, 0.2178, 4.131, 3.9132
+1, 40000, 294, 351, 0.5056, 9.73834, 9.23274
+2, 90000, 420, 468, 0.7688, 17.71, 16.9412
+3, 160000, 615, 621, 0.9038, 43.9114, 43.0076
+4, 250000, 786, 804, 1.17273, 56.357, 55.1843
+5, 360000, 936, 804, 1.35087, 103.88, 102.529
+6, 490000, 1023, 1104, 1.69233, 99.8532, 98.1609
+7, 640000, 1218, 6486500, 1.96973, 90.3515, 88.3818
+8, 810000, 1359, 1308, 1.98467, 230.157, 228.172
+9, 1000000, 1530, 1500, 2.2738, 116.682, 114.408

@@ -1,0 +1,2 @@
+Hill climbing algorithm is a local search algorithm which continuously moves in the direction of increasing elevation/value to find the peak of the mountain or best solution to the problem.
+It terminates when it reaches a peak value where no neighbor has a higher value.

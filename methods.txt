@@ -1,0 +1,125 @@
+The hill climber
+
+int hillClimbingAlgorithm(int **G, int n){
+    
+    vector<int> randomRows;
+    vector<int> missingRows;
+    vector<int> allOneColRow;
+    vector<int> allOneRowCol;
+    vector<int> missingColumns;
+    
+    randomRows = generateRandomSubsetOfRowsX();
+    allOneColRow = allColsWithOnesInEveryX(G, randRows, n);
+    allOneRowCol = allOneRowColWeHave(G, allOneColRow, n);
+
+    int gSize = sizeOfSubMatrix(allOneRowCol, allOneColRow, maxSize);
+    int bestSize = gSize;
+    
+    missRows = findMissingRows(allOneColRow, n);
+    for (int i = 0; i < missRows.size(); i++){
+        //add each missing row
+        int succ = addRow(G, allOneRowCol, missRows.at(i), gSize);
+        if (succ <= bestSize){
+            return bestSize;
+        }else{
+            bestSize = succ;
+        }
+    }
+    
+    missCols = findMissingColumns(allOneColRow, n);
+    for (int i = 0; i < missCols.size(); i++){
+        //add each missing col
+        int succ = addCol(G, allOneColRow, missCols.at(i), gSize, n);
+        if (succ <= bestSize){
+            return bestSize;
+        }else{
+            bestSize = succ;
+        }
+    }
+}
+int simmulaedAnnealing(int **G, int n){
+    
+    vector<int> randomRows;
+    vector<int> allOneColRow;
+    vector<int> allOneRowCol;
+    vector<int> missRows;
+    vector<int> missCols;
+
+    randomRows = generateRandomSubsetOfRowsX();
+    allOneColRow = allColsWithOnesInEveryX(G, randomRows, n);
+    allOneRowCol = allOneRowColWeHave(G, allOneColRow, n);
+
+    int gSize = sizeOfSubMatrix(allOneRowCol, allOneColRow, maxSize);
+    missRows = findMissingRows(allOneRowCol, n);
+    
+    int bestSize = gSize;
+    int T = missRows.size();
+
+    for (int i = 0; i < missRows.size(); i++){
+        if (T == 0){
+           return bestSize;
+        }
+        int succ = addRow(G, allOneRowCol, missRows.at(i), gSize, n);
+        int stateChange = succ - bestSize;
+        if (stateChange > 0){
+            bestSize = succ;
+        }else{
+            double probability = exp((stateChange/T));
+            if (probability > ((double)rand()/(double)RAND_MAX)){
+                bestSize = succ;
+            }
+            else{
+                return bestSize;
+            }
+        }
+        T = (T - i);
+    }
+
+    missCols = findMissingColumns(allOneColRow, n);
+    int TT = missCols.size();
+    
+    for (int i = 0; i < missCols.size(); i++){
+        if (TT == 0){
+           return bestSize;
+        }
+        int succ = addCol(G, allOneColRow, missCols.at(i), gSize, n);
+        int stateChange = succ - bestSize;
+        if (stateChange > 0){
+            bestSize = succ;
+        }else{
+            double probabilityy = exp((stateChange/TT));
+            if (probabilityy > ((double)rand()/(double)RAND_MAX)){
+                bestSize = succ;
+            }
+            else{
+                return bestSize;
+            }
+        }
+        TT = (TT - i);
+    }
+}
+
+
+
+
+
+-This function starts by randomly selecting a subset of rows of the current input matrix,
+ and finds all columns with ones in every position of these subset of rows, if these columns exist,
+ it goes ahead and finds all rows with ones in every position of these columns it just found.
+
+-The set of these corresponding rows and columns form a complete sub-matrix and the size of this sub-matrix
+ is given by the product of length(rows) and length(columns).
+
+
+-The size of this complete sub-matrix evaluted represents the current random solution generated,
+ next, the function searches for a larger complete sub-matrix by finding all rows of the input matrix that are not already in the current set of rows we have,
+ for every missing row found, we add it in the inner loop by calling the 'addRow' method as shown in the below snippet.
+ the 'addRow' method finds all columns that correspond to the rows we have after adding each missing row and then returns the size of the newly generated complete sub-matrix,
+ it returns 0 if these sets of rows and columns does not form a complete sub-matrix.
+
+
+-The size of this newly generated complete sub-matrix becomes the best of the above successors, inside the inner loop we compare the previous size solution we had with the best so far(i.e size of the newly generated complete sub-matrix),
+ if the new size is better than the previous size solution we had, the best size solution is updated.
+
+ -The algorithm terminates when it reaches convergence, that is the maximum number of iterations we repeatedly run this algorithm over.
+
